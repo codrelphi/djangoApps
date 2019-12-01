@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todolist App</title>
+  </head>
+  <body>
+    <h1>My todo list</h1>
+    <form action={% url 'addtask' %} method="post">
+      {% csrf_token %}
+      <input type="text" name="task-name" placeholder="add a task">
+      <input type="submit">
+    </form>
+    <ul>
+      {% for task in tasks %}
+      <li>
+        {{task}}
+        <button type="button" name="button">X</button>
+      </li>
+      {% empty %}
+      <p>No Tasks.</p>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
