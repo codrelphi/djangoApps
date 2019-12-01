@@ -8,7 +8,7 @@ from .models import Flight, Passenger
 
 def index(request):
     context = {
-        "flights": Flight.objects.all()
+        "flights": Flight.objects.all(),
     }
     return render(request, "flights/index.html", context)
 

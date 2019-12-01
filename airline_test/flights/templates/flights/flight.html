@@ -2,11 +2,35 @@
 
 {% block body %}
 
-  <h1>{{flight.id}}</h1>
-  <p>
-    Origin: {{flight.origin}} <br>
-    Destination: {{flight.destination}} <br>
-    Duration: {{flight.duration}} <br>
-  </p>
+  <h1>Flight {{flight.id}}</h1>
+  <ul>
+    <li>Origin: {{flight.origin}} </li>
+    <li>Destination: {{flight.destination}}</li>
+    <li>Duration: {{flight.duration}}</li>
+  </ul>
+  <h1>List of passengers</h1>
+  <ul>
+    {% for passenger in passengers %}
+    <li>{{passenger}}</li>
+    {% empty %}
+    <p>No Passengers.</p>
+    {% endfor %}
+  </ul>
+  <h2>Add a passenger</h2>
+  <form action={% url 'book' flight.id %} method="post">
+    {% csrf_token %}
+    <select name="passenger">
+      <option value="">Please, choose a passenger</option>
+      {% for passenger in non_passengers %}
+      <option value={{passenger.id}}>{{passenger}}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" value="Book a flight">
+  </form>
+  <hr>
+  <div>
+    <a href={% url 'index' %}>Back to full listing</a>
+  </div>
+
 
 {% endblock %}
