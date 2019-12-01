@@ -1,0 +1,12 @@
+{% extends './base.html' %}
+
+{% block body %}
+
+  <h1>{{flight.id}}</h1>
+  <p>
+    Origin: {{flight.origin}} <br>
+    Destination: {{flight.destination}} <br>
+    Duration: {{flight.duration}} <br>
+  </p>
+
+{% endblock %}
