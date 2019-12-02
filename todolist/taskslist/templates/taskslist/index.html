@@ -13,11 +13,11 @@
     </form>
     <ul>
       {% for task in tasks %}
-      <form action="#" method="post">
+      <form action={% url 'delete_task' task.id %} method="post">
       {% csrf_token %}
       <li>
         {{task}}
-        <button type="button" name="button">X</button>
+        <input type="submit" name="delete-a-task" value="X">
       </li>
       </form>
       {% empty %}
