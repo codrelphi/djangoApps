@@ -20,10 +20,6 @@ def addTask(request):
         Task(name=name).save()
     return HttpResponseRedirect(reverse("index"))
 
-"""def deleteTask(request, task_id):
-    try:
-        id = int(request.POST['task-deletion'])
-    except:
-        return render(request, "taskslist/error.html", {"message": "No Task."})
-    return render(request, "taskslist/index.html", {})
-"""
+def delete_task(request, task_id):
+    Task.objects.get(pk=task_id).delete()
+    return HttpResponseRedirect(reverse("index"))
