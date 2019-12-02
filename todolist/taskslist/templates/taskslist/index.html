@@ -13,10 +13,13 @@
     </form>
     <ul>
       {% for task in tasks %}
+      <form action="#" method="post">
+      {% csrf_token %}
       <li>
         {{task}}
         <button type="button" name="button">X</button>
       </li>
+      </form>
       {% empty %}
       <p>No Tasks.</p>
       {% endfor %}

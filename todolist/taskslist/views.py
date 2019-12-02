@@ -16,5 +16,14 @@ def addTask(request):
     except:
         return render(request, "taskslist/error.html", {"message": "No Task."})
 
-    Task(name=name).save()
+    if len(name) > 0:
+        Task(name=name).save()
     return HttpResponseRedirect(reverse("index"))
+
+"""def deleteTask(request, task_id):
+    try:
+        id = int(request.POST['task-deletion'])
+    except:
+        return render(request, "taskslist/error.html", {"message": "No Task."})
+    return render(request, "taskslist/index.html", {})
+"""
