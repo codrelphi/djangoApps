@@ -2,27 +2,45 @@
 <html>
   <head>
     <meta charset="utf-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'taskslist/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'taskslist/bootstrap.min.css' %}">
     <title>Todolist App</title>
   </head>
   <body>
-    <h1>My todo list</h1>
-    <form action={% url 'addtask' %} method="post">
-      {% csrf_token %}
-      <input type="text" name="task-name" placeholder="add a task">
-      <input type="submit">
-    </form>
-    <ul>
-      {% for task in tasks %}
-      <form action={% url 'delete_task' task.id %} method="post">
-      {% csrf_token %}
-      <li>
-        {{task}}
-        <input type="submit" name="delete-a-task" value="X">
-      </li>
-      </form>
-      {% empty %}
-      <p>No Tasks.</p>
-      {% endfor %}
-    </ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <h1>My todo list</h1>
+          <form action={% url 'addtask' %} method="post">
+            {% csrf_token %}
+            <input type="text" name="task-name" placeholder="add a task">
+            <input type="submit">
+          </form>
+          <br><br>
+        </div>
+        <div class="col-4"></div>
+      </div>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+          <ul class="list-group">
+            {% for task in tasks %}
+            <form action={% url 'delete_task' task.id %} method="post">
+            {% csrf_token %}
+            <li class="list-group-item">
+              {{task}}
+              <input type="submit" name="delete-a-task" value="X">
+            </li>
+            </form>
+            {% empty %}
+            <p>No Tasks.</p>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
   </body>
 </html>
