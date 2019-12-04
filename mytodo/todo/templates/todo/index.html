@@ -10,6 +10,10 @@
       {% for todo in todo_list %}
       <li>
         {{ todo }}
+        <form style="display: inline" action={% url 'edit' todo.id %} method="post">
+          {% csrf_token %}
+          <input type="submit" value="Edit">
+        </form>
         <form style="display: inline" action={% url 'delete' todo.id %} method="post">
           {% csrf_token %}
           <input type="submit" value="Delete">
@@ -20,7 +24,10 @@
     <form action={% url "add"  %} method="post">
       {% csrf_token %}
       <input type="text" name="todo-input" placeholder="add a task">
-      <input type="submit" value="add">
+      <input type="submit" value="Add">
+      {% if message %}
+      <p>{{message}}</p>
+      {% endif %}
     </form>
 
   </body>

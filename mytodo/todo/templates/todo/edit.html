@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Edit - To-do App</title>
+  </head>
+  <body>
+    <h1>my to-do app</h1>
+    <form action={% url "add_edit" todo.id %} method="post">
+      {% csrf_token %}
+      <!--<input type="hidden" name="todo-id" value="{{todo.id}}">-->
+      <input type="text" name="todo-edit-input" value="{{todo}}">
+      <input type="submit" value="Edit">
+      {% if message %}
+      <p>{{message}}</p>
+      {% endif %}
+    </form>
+
+  </body>
+</html>
