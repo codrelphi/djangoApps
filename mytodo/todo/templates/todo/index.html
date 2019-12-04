@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>To-do App</title>
+  </head>
+  <body>
+    <h1>my to-do app</h1>
+    <ul>
+      {% for todo in todo_list %}
+      <li>
+        {{ todo }}
+        <form style="display: inline" action={% url 'delete' todo.id %} method="post">
+          {% csrf_token %}
+          <input type="submit" value="Delete">
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    <form action={% url "add"  %} method="post">
+      {% csrf_token %}
+      <input type="text" name="todo-input" placeholder="add a task">
+      <input type="submit" value="add">
+    </form>
+
+  </body>
+</html>
