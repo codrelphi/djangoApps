@@ -4,7 +4,7 @@ from django.urls import reverse
 
 from .models import Flight, Passenger
 
-# Create your views here.
+
 def index(request):
     context = {
         "flights": Flight.objects.all()
@@ -26,6 +26,9 @@ def flight(request, flight_id):
 
 def book(request, flight_id):
     try:
+        if not request.POST['passenger']:
+            return HttpResponseRedirect(reverse("flight", args=(flight_id,)))
+            
         passenger_id = int(request.POST['passenger'])
         passenger = Passenger.objects.get(pk=passenger_id)
         flight = Flight.objects.get(pk=flight_id)
